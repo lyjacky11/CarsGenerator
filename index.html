@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 <html>
-
 <head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cars Gen</title>
+
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+    
+        .main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-content: center;
+    
+            height: 100vh;
+        }
+    
+        .main>* {
+            margin: 15px auto 15px auto;
+        }
+    
+        input,
+        textarea {
+            min-width: 500px;
+        }
+    
+        textarea {
+            min-height: 500px;
+        }
+    </style>
 </head>
-<style>
-    body {
-        padding: 0;
-        margin: 0;
-    }
-
-    .main {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-content: center;
-
-        height: 100vh;
-    }
-
-    .main>* {
-        margin: 15px auto 15px auto;
-    }
-
-    input,
-    textarea {
-        min-width: 500px;
-    }
-
-    textarea {
-        min-height: 500px;
-    }
-</style>
-
 <body>
     <div class="main">
         <label>Number of Cars to Generate</label>
@@ -87,5 +87,4 @@
 
     </script>
 </body>
-
 </html>
