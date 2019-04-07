@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars Gen</title>
+</head>
+<style>
+    body {
+        padding: 0;
+        margin: 0;
+    }
+
+    .main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+
+        height: 100vh;
+    }
+
+    .main>* {
+        margin: 15px auto 15px auto;
+    }
+
+    input,
+    textarea {
+        min-width: 500px;
+    }
+
+    textarea {
+        min-height: 500px;
+    }
+</style>
+
+<body>
+    <div class="main">
+        <label>Number of Cars to Generate</label>
+        <input id="numCars" placeholder="100">
+        <button onclick="genCars()">Generate</button>
+        <label>Copy and Paste</label>
+        <textarea id="pasta" readonly></textarea>
+        <button onclick="copy()">Copy</button>
+    </div>
+    <script>
+        let companies = ['Toyota', 'Honda', 'Kia', 'BMW', 'Chevy', 'Bently', 'Audi', 'Hyundai', 'MINI', 'Dodge', 'Ford', 'Smart'];
+        let colors = ['red', 'blue', 'green', 'yellow', 'black', 'white', 'silver', 'orange', 'lightblue', 'pink', 'grey'];
+        let carTypes = ['SEDAN', 'MINIVAN', 'SPORTS'];
+        let engineTypes = ['ELECTRIC_MOTOR', 'GAS_ENGINE'];
+        let driveTypes = ['AWD', '2WD'];
+
+        function getRandom(arr) {
+            return arr[Math.floor(Math.random() * Math.floor(arr.length))];
+        }
+
+        function genCars() {
+            let numCars = document.querySelector('#numCars').value;
+            let pasta = document.querySelector('#pasta');
+            pasta.value = "";
+
+            for (let i = 0; i < numCars; i++) {
+                let brand = getRandom(companies);
+                let color = getRandom(colors);
+                let carType = getRandom(carTypes);
+                let engineType = getRandom(engineTypes);
+                let safetyRating = Math.floor((Math.random() * Math.floor(100)))/10;
+                let driveType = getRandom(driveTypes);
+                let range = Math.floor(Math.random() * Math.floor(700));
+                let price = Math.floor((Math.random() * Math.floor(100000)));
+                let rechargeTime;
+                if(engineType === 'ELECTRIC_MOTOR') {
+                    rechargeTime = Math.floor(Math.random() * Math.floor(100));
+                }
+                
+                let car = `${brand} ${color} ${carType} ${engineType} ${safetyRating} ${range} ${driveType} ${price} ${(rechargeTime)?rechargeTime:""} \n`;
+                pasta.value+=car;
+            }
+        }
+
+        function copy() {
+            let pasta = document.querySelector('#pasta');
+            pasta.select();
+            pasta.execCommand("copy");
+            alert("Copied Generated Cars!");
+        }
+
+    </script>
+</body>
+
+</html>
