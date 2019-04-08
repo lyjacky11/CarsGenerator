@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cars Gen</title>
+    <title>CPS 209 - Random Car Generator</title>
 
     <style>
         body {
@@ -38,14 +38,22 @@
 
 <body>
     <div class="main">
-        <label>Number of Cars to Generate</label>
-        <input id="numCars" placeholder="100">
+		<h1>CPS 209 - Random cars.txt Generator</h1>
+        <label>Enter the number of cars to generate:</label>
+        <input id="numCars" placeholder="ex. 100">
+		<div id="controls">
         <button onclick="genCars()">Generate</button>
+		<button onClick="window.location.reload()">Reset</button>
+		</div>
+		<div id="buttons">
         <button onclick="stopBuild()">Stop</button>
         <button onclick="continueBuild()">Continue</button>
-        <label>Copy and Paste</label>
+		</div>
+		
+        <label>Output Result:</label>
         <textarea id="pasta" readonly></textarea>
-        <button onclick="copy()">Copy</button>
+		<label id="msg" style="display:none">Output has been copied to clipboard!</label>
+        <button onclick="copy()">Copy To Clipboard</button>
     </div>
     <script>
         let companies = ['Toyota', 'Honda', 'Kia', 'BMW', 'Chevy', 'Bently', 'Audi', 'Hyundai', 'MINI', 'Dodge', 'Ford', 'Smart'];
@@ -55,6 +63,7 @@
         let driveTypes = ['AWD', '2WD'];
 
         let pasta = document.querySelector('#pasta');
+		let msg = document.querySelector('#msg');
         let emergencyBrakes = false;
 
         let str = "";
@@ -111,6 +120,9 @@
         function copy() {
             pasta.select();
             document.execCommand("copy");
+			if (count > 0) {
+				msg.style.display = "block";
+			}
         }
 
     </script>
