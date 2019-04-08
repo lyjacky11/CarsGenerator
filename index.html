@@ -4,9 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="/cdn-cgi/apps/head/TGzHyHrnq8dQXFZGFesKs4_wAAM.js"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <title>CPS 209 - Random Car Generator</title>
 
     <style>
+		html, body{
+			font-family: Montserrat;
+			font-size:16px;
+			scroll-behavior: smooth;
+		}
         body {
             padding: 0;
             margin: 0;
@@ -24,6 +30,22 @@
         .main>* {
             margin: 15px auto 15px auto;
         }
+		
+		.button {
+			background: #3775f2;
+			border-color: transparent;
+            border-radius: 5px;
+            padding: 10px;
+            color: #FFFFFF;
+            font-size: 14px;
+            cursor: pointer;
+		}
+		
+		.textbox {
+			border-color: #8e9199;
+            border-radius: 3px;
+			padding: 5px;
+		}
 
         input,
         textarea {
@@ -40,20 +62,20 @@
     <div class="main">
 		<h1>CPS 209 - Random cars.txt Generator</h1>
         <label>Enter the number of cars to generate:</label>
-        <input id="numCars" placeholder="ex. 100">
+        <input class="textbox" id="numCars" placeholder="ex. 100">
 		<div id="controls">
-        <button onclick="genCars()">Generate</button>
-		<button onClick="window.location.reload()">Reset</button>
+        <button class="button" onclick="genCars()">Generate</button>
+		<button class="button" onClick="clearText()">Clear</button>
 		</div>
 		<div id="buttons">
-        <button onclick="stopBuild()">Stop</button>
-        <button onclick="continueBuild()">Continue</button>
+        <button class="button" onclick="stopBuild()">Stop</button>
+        <button class="button"onclick="continueBuild()">Continue</button>
 		</div>
 		
         <label>Output Result:</label>
-        <textarea id="pasta" readonly></textarea>
+        <textarea class="textbox" id="pasta" readonly></textarea>
 		<label id="msg" style="display:none">Output has been copied to clipboard!</label>
-        <button onclick="copy()">Copy To Clipboard</button>
+        <button class="button" onclick="copy()">Copy To Clipboard</button>
     </div>
     <script>
         let companies = ['Toyota', 'Honda', 'Kia', 'BMW', 'Chevy', 'Bently', 'Audi', 'Hyundai', 'MINI', 'Dodge', 'Ford', 'Smart'];
@@ -62,6 +84,7 @@
         let engineTypes = ['ELECTRIC_MOTOR', 'GAS_ENGINE'];
         let driveTypes = ['AWD', '2WD'];
 
+		let numCars = document.querySelector('#numCars');
         let pasta = document.querySelector('#pasta');
 		let msg = document.querySelector('#msg');
         let emergencyBrakes = false;
@@ -82,6 +105,13 @@
         function stopBuild() {
             emergencyBrakes = true;
         }
+		
+		function clearText() {
+			numCars.value = "";
+			pasta.value = "";
+			msg.style.display = "none";
+			count = 0;
+		}
 
         function buildCar() {           
             let brand = getRandom(companies);
