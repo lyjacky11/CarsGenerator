@@ -78,11 +78,11 @@
         <button class="button" onclick="copy()">Copy To Clipboard</button>
     </div>
     <script>
-        let companies = ['Toyota', 'Honda', 'Kia', 'BMW', 'Chevy', 'Bently', 'Audi', 'Hyundai', 'MINI', 'Dodge', 'Ford', 'Smart'];
-        let colors = ['red', 'blue', 'green', 'yellow', 'black', 'white', 'silver', 'orange', 'lightblue', 'pink', 'grey'];
+        let companies = ['Ford', 'Toyota', 'Honda', 'Nissan', 'Hyundai', 'Kia', 'Mazda', 'BMW', 'Tesla', 'Chevy', 'Acura', 'Audi', "Lexus", "Porsche", "MercedesBenz"];
+        let colors = ['white', 'silver', 'black', 'grey', 'blue', 'red', 'brown', 'green', 'yellow'];
         let carTypes = ['SEDAN', 'MINIVAN', 'SPORTS'];
         let engineTypes = ['ELECTRIC_MOTOR', 'GAS_ENGINE'];
-        let driveTypes = ['AWD', '2WD'];
+        let driveTypes = ['2WD', 'AWD'];
 
 		let numCars = document.querySelector('#numCars');
         let pasta = document.querySelector('#pasta');
@@ -111,6 +111,7 @@
 			pasta.value = "";
 			msg.style.display = "none";
 			count = 0;
+			limit = 0;
 		}
 
         function buildCar() {           
@@ -118,16 +119,17 @@
             let color = getRandom(colors);
             let carType = getRandom(carTypes);
             let engineType = getRandom(engineTypes);
-            let safetyRating = Math.floor((Math.random() * Math.floor(100))) / 10;
+            let safetyRating = Math.floor(Math.random() * 50) / 10 + 5;
             let driveType = getRandom(driveTypes);
-            let range = Math.floor(Math.random() * Math.floor(700));
-            let price = Math.floor((Math.random() * Math.floor(100000)));
+            let range = Math.floor(Math.random() * 600) + 300;
+            let price = Math.floor(Math.random() * 100000) + 25000;
             let rechargeTime;
             if (engineType === 'ELECTRIC_MOTOR') {
-                rechargeTime = Math.floor(Math.random() * Math.floor(100));
+                rechargeTime = Math.floor(Math.random() * 80) + 20;
             }
 
             let car = `${brand} ${color} ${carType} ${engineType} ${safetyRating} ${range} ${driveType} ${price} ${(rechargeTime) ? rechargeTime : ""} \n`;
+			car = car.replace(/[" "]/g, "  ")
             pasta.value += car;
             
             count++;
