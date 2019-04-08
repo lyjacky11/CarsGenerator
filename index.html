@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,30 +11,31 @@
             padding: 0;
             margin: 0;
         }
-    
+
         .main {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-content: center;
-    
+
             height: 100vh;
         }
-    
+
         .main>* {
             margin: 15px auto 15px auto;
         }
-    
+
         input,
         textarea {
             min-width: 500px;
         }
-    
+
         textarea {
             min-height: 500px;
         }
     </style>
 </head>
+
 <body>
     <div class="main">
         <label>Number of Cars to Generate</label>
@@ -50,32 +52,47 @@
         let engineTypes = ['ELECTRIC_MOTOR', 'GAS_ENGINE'];
         let driveTypes = ['AWD', '2WD'];
 
+        let pasta = document.querySelector('#pasta');
+
+        let str = "";
+        let count = 0;
+        let limit = 0;
+
         function getRandom(arr) {
             return arr[Math.floor(Math.random() * Math.floor(arr.length))];
         }
 
-        function genCars() {
-            let numCars = document.querySelector('#numCars').value;
-            let pasta = document.querySelector('#pasta');
-            pasta.value = "";
-
-            for (let i = 0; i < numCars; i++) {
-                let brand = getRandom(companies);
-                let color = getRandom(colors);
-                let carType = getRandom(carTypes);
-                let engineType = getRandom(engineTypes);
-                let safetyRating = Math.floor((Math.random() * Math.floor(100)))/10;
-                let driveType = getRandom(driveTypes);
-                let range = Math.floor(Math.random() * Math.floor(700));
-                let price = Math.floor((Math.random() * Math.floor(100000)));
-                let rechargeTime;
-                if(engineType === 'ELECTRIC_MOTOR') {
-                    rechargeTime = Math.floor(Math.random() * Math.floor(100));
-                }
-                
-                let car = `${brand} ${color} ${carType} ${engineType} ${safetyRating} ${range} ${driveType} ${price} ${(rechargeTime)?rechargeTime:""} \n`;
-                pasta.value+=car;
+        function buildCar() {           
+            let brand = getRandom(companies);
+            let color = getRandom(colors);
+            let carType = getRandom(carTypes);
+            let engineType = getRandom(engineTypes);
+            let safetyRating = Math.floor((Math.random() * Math.floor(100))) / 10;
+            let driveType = getRandom(driveTypes);
+            let range = Math.floor(Math.random() * Math.floor(700));
+            let price = Math.floor((Math.random() * Math.floor(100000)));
+            let rechargeTime;
+            if (engineType === 'ELECTRIC_MOTOR') {
+                rechargeTime = Math.floor(Math.random() * Math.floor(100));
             }
+
+            let car = `${brand} ${color} ${carType} ${engineType} ${safetyRating} ${range} ${driveType} ${price} ${(rechargeTime) ? rechargeTime : ""} \n`;
+            pasta.value += car;
+            
+            count++;
+
+            if(count >= limit) {
+                window.cancelAnimationFrame(buildCar);
+            } else {
+                window.requestAnimationFrame(buildCar);
+            }
+        }
+
+        async function genCars() {
+            limit = document.querySelector('#numCars').value;
+            pasta.value = "";
+            count = 0;
+            window.requestAnimationFrame(buildCar);
         }
 
         function copy() {
@@ -87,4 +104,5 @@
 
     </script>
 </body>
+
 </html>
