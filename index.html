@@ -147,7 +147,9 @@
             limit = document.querySelector('#numCars').value;
             pasta.value = "";
             count = 0;
-            window.requestAnimationFrame(buildCar);
+			if(!isNaN(limit)) {
+				window.requestAnimationFrame(buildCar);
+			}
         }
 
         function copy() {
