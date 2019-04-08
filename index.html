@@ -4,7 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="/cdn-cgi/apps/head/TGzHyHrnq8dQXFZGFesKs4_wAAM.js"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+	<script src="/cdn-cgi/apps/head/TGzHyHrnq8dQXFZGFesKs4_wAAM.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat"/>
+	<link rel="icon" type="image/png" href="favicon.png" />
     <title>CPS 209 - Random Car Generator</title>
 
     <style>
@@ -12,6 +14,10 @@
 			font-family: Montserrat;
 			font-size:16px;
 			scroll-behavior: smooth;
+			background-image: url("background.jpg");
+			background-position: center; /* Center the image */
+			background-repeat: no-repeat; /* Do not repeat the image */
+			background-size: cover;
 		}
         body {
             padding: 0;
@@ -59,9 +65,10 @@
 </head>
 
 <body>
+	<div></div>
+	<br></br><br></br>
     <div class="main">
-	<br></br>
-	<h1>CPS 209 - Random cars.txt Generator</h1>
+		<h1>CPS 209 - Random cars.txt Generator</h1>
         <label>Enter the number of cars to generate:</label>
         <input class="textbox" id="numCars" placeholder="ex. 100">
 		<div id="controls">
