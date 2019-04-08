@@ -41,6 +41,8 @@
         <label>Number of Cars to Generate</label>
         <input id="numCars" placeholder="100">
         <button onclick="genCars()">Generate</button>
+        <button onclick="stopBuild()">Stop</button>
+        <button onclick="continueBuild()">Continue</button>
         <label>Copy and Paste</label>
         <textarea id="pasta" readonly></textarea>
         <button onclick="copy()">Copy</button>
@@ -53,6 +55,7 @@
         let driveTypes = ['AWD', '2WD'];
 
         let pasta = document.querySelector('#pasta');
+        let emergencyBrakes = false;
 
         let str = "";
         let count = 0;
@@ -60,6 +63,15 @@
 
         function getRandom(arr) {
             return arr[Math.floor(Math.random() * Math.floor(arr.length))];
+        }
+
+        function continueBuild() {
+            emergencyBrakes = false;
+            window.requestAnimationFrame(buildCar);
+        }
+
+        function stopBuild() {
+            emergencyBrakes = true;
         }
 
         function buildCar() {           
@@ -81,7 +93,7 @@
             
             count++;
 
-            if(count >= limit) {
+            if(count >= limit || emergencyBrakes) {
                 window.cancelAnimationFrame(buildCar);
             } else {
                 window.requestAnimationFrame(buildCar);
@@ -89,6 +101,7 @@
         }
 
         async function genCars() {
+            emergencyBrakes = false;
             limit = document.querySelector('#numCars').value;
             pasta.value = "";
             count = 0;
@@ -96,10 +109,8 @@
         }
 
         function copy() {
-            let pasta = document.querySelector('#pasta');
             pasta.select();
-            pasta.execCommand("copy");
-            alert("Copied Generated Cars!");
+            document.execCommand("copy");
         }
 
     </script>
